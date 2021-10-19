@@ -30,7 +30,7 @@ const FileSchema = new Schema<IFile>(
 		},
 		expire_at: {
 			type: Date,
-			default: Date.now(),
+			default: Date.now,
 			expires: 604800,
 		},
 		sender: String,
