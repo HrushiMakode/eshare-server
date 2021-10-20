@@ -28,11 +28,6 @@ const fileSchema = new Schema<IFile>(
 			type: String,
 			required: true,
 		},
-		expire_at: {
-			type: Date,
-			default: Date.now,
-			expires: 604800,
-		},
 		sender: String,
 		receiver: String,
 	},
@@ -41,13 +36,6 @@ const fileSchema = new Schema<IFile>(
 	}
 );
 
-fileSchema.index(
-	{
-		expire_at: 1,
-	},
-	{
-		expireAfterSeconds: 5,
-	}
-);
+fileSchema.index({ createdAt: 1 }, { expireAfterSeconds: 604800 });
 
 export default model("File", fileSchema);
