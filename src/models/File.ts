@@ -10,7 +10,7 @@ export interface IFile extends Document {
 	expire_at: number | undefined;
 }
 
-const FileSchema = new Schema<IFile>(
+const fileSchema = new Schema<IFile>(
 	{
 		filename: {
 			type: String,
@@ -41,4 +41,13 @@ const FileSchema = new Schema<IFile>(
 	}
 );
 
-export default model("File", FileSchema);
+fileSchema.index(
+	{
+		expire_at: 1,
+	},
+	{
+		expireAfterSeconds: 5,
+	}
+);
+
+export default model("File", fileSchema);
